@@ -11,7 +11,20 @@ async function showMovies() {
 
         const film = data.result;
 
-        console.log(film);
+        const belowButtons = document.getElementById("belowButtons");
+
+        let movieList = "";
+
+        for (let i = 0; i < film.length; i++) {
+            belowButtons.innerHTML+=film[i].properties.title + "<br>";
+        }
+
+        //for (let i = 0; i < film.length; i++) {
+        //    movieList += film[i].properties.title + "\n";
+        //}
+
+        //belowButtons.textContent = movieList;
+
     }
 
     catch (err) {
