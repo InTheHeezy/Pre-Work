@@ -17,36 +17,7 @@ async function showMovies() {
         Container Test 
         */
 
-        const containerDiv = document.createElement("container");
-        containerDiv.classList.add("container");
-
-        const imgDiv = document.createElement("image-container");
-        imgDiv.classList.add("image-container");
-        var img = document.createElement("img");
-        img.src = "https://upload.wikimedia.org/wikipedia/en/8/87/StarWarsMoviePoster1977.jpg";
-        imgDiv.appendChild(img);
-
-        const txtDiv = document.createElement("text-container");
-        txtDiv.classList.add("text-container");
-        const titleHeader = document.createElement("h1");
-        titleHeader.textContent = film[0].properties.title;
-
-        const directors = document.createElement("p");
-        directors.textContent = "Director(s): " + film[0].properties.director;
-
-        const producers = document.createElement("p");
-        producers.textContent = "Producer(s): " + film[0].properties.producer;
-
-        const release = document.createElement("p");
-        release.textContent = "Release Date: " + film[0].properties.release_date;
-
-        txtDiv.appendChild(titleHeader);
-        txtDiv.appendChild(directors);
-        txtDiv.appendChild(producers);
-        txtDiv.appendChild(release);
-
-        containerDiv.appendChild(imgDiv);
-        containerDiv.appendChild(txtDiv);
+        const containerDiv = createBodyContent(film[0].properties);
 
         document.body.appendChild(containerDiv);
 
@@ -65,6 +36,39 @@ async function showMovies() {
     }
 }
 
-function createBodyContent() {
+function createBodyContent(filmProperties) {
 
+    const containerDiv = document.createElement("container");
+    containerDiv.classList.add("container");
+
+    const imgDiv = document.createElement("image-container");
+    imgDiv.classList.add("image-container");
+    var img = document.createElement("img");
+    /* change this part */
+    img.src = "https://upload.wikimedia.org/wikipedia/en/8/87/StarWarsMoviePoster1977.jpg";
+    imgDiv.appendChild(img);
+
+    const txtDiv = document.createElement("text-container");
+    txtDiv.classList.add("text-container");
+    const titleHeader = document.createElement("h1");
+    titleHeader.textContent = filmProperties.title;
+
+    const directors = document.createElement("p");
+    directors.textContent = "Director(s): " + filmProperties.directors;
+
+    const producers = document.createElement("p");
+    producers.textContent = "Producer(s): " + filmProperties.producer;
+
+    const release = document.createElement("p");
+    release.textContent = "Release Date: " + filmProperties.release_date;
+
+    txtDiv.appendChild(titleHeader);
+    txtDiv.appendChild(directors);
+    txtDiv.appendChild(producers);
+    txtDiv.appendChild(release);
+
+    containerDiv.appendChild(imgDiv);
+    containerDiv.appendChild(txtDiv);
+
+    return containerDiv;
 }
