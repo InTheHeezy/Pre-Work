@@ -12,21 +12,11 @@ async function showMovies() {
         const data = await response.json();
         const film = data.result;
 
-        /* @TODO remove this */
-        console.log(film);
-        
-        const containerDiv = createBodyContent(film[0].properties);
-
-        document.body.appendChild(containerDiv);
-
-        /*
-
-        let movieList = "";
-
         for (let i = 0; i < film.length; i++) {
-            belowButtons.innerHTML += film[i].properties.title + "<br>";
+            const containerDiv = createBodyContent(film[i].properties);
+
+            document.body.appendChild(containerDiv);
         }
-        */
     }
 
     catch (err) {
@@ -51,7 +41,7 @@ function createBodyContent(filmProperties) {
     titleHeader.textContent = filmProperties.title;
 
     const directors = document.createElement("p");
-    directors.textContent = "Director(s): " + filmProperties.directors;
+    directors.textContent = "Director: " + filmProperties.director;
 
     const producers = document.createElement("p");
     producers.textContent = "Producer(s): " + filmProperties.producer;
