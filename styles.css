@@ -22,3 +22,26 @@
     background-color: gray;
     color:white;
 }
+
+.container {
+    display: flex;
+    justify-content: center; /* horizontal centering */
+    align-items: center; /* vetical centering */
+    gap: 20px; /* space between image and text */
+    border: none;
+    padding: 10px;
+}
+
+.image-container{
+
+}
+
+.text-container{
+
+}
+
+.image-container img{
+    max-width: auto; /* image size */
+    height: auto;
+    display: block; /* removes default bottom margin */
+}
