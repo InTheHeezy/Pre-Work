@@ -45,7 +45,7 @@ function createBodyContent(filmProperties) {
     imgDiv.classList.add("image-container");
     var img = document.createElement("img");
     /* change this part */
-    img.src = "https://upload.wikimedia.org/wikipedia/en/8/87/StarWarsMoviePoster1977.jpg";
+    img.src = imageCheck(filmProperties.title);
     imgDiv.appendChild(img);
 
     const txtDiv = document.createElement("text-container");
@@ -71,4 +71,13 @@ function createBodyContent(filmProperties) {
     containerDiv.appendChild(txtDiv);
 
     return containerDiv;
+}
+
+function imageCheck(filmTitle) {
+    var imgSrc = "";
+    switch (filmTitle) {
+        case "A New Hope":
+            imgSrc = "https://upload.wikimedia.org/wikipedia/en/8/87/StarWarsMoviePoster1977.jpg";
+    }
+    return imgSrc;
 }
