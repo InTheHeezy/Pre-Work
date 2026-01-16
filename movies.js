@@ -11,12 +11,10 @@ async function showMovies() {
 
         const data = await response.json();
         const film = data.result;
+
+        /* @TODO remove this */
         console.log(film);
         
-        /*
-        Container Test 
-        */
-
         const containerDiv = createBodyContent(film[0].properties);
 
         document.body.appendChild(containerDiv);
@@ -77,6 +75,22 @@ function imageCheck(filmTitle) {
     switch (filmTitle) {
         case "A New Hope":
             imgSrc = "https://upload.wikimedia.org/wikipedia/en/8/87/StarWarsMoviePoster1977.jpg";
+            break;
+        case "The Empire Strikes Back":
+            imgSrc = "https://upload.wikimedia.org/wikipedia/en/3/3f/The_Empire_Strikes_Back_%281980_film%29.jpg";
+            break;
+        case "Return of the Jedi":
+            imgSrc = "https://upload.wikimedia.org/wikipedia/en/b/b2/ReturnOfTheJediPoster1983.jpg";
+            break;
+        case "The Phantom Menace":
+            imgSrc = "https://upload.wikimedia.org/wikipedia/en/4/40/Star_Wars_Phantom_Menace_poster.jpg";
+            break;
+        case "Attack of the Clones":
+            imgSrc = "https://upload.wikimedia.org/wikipedia/en/3/32/Star_Wars_-_Episode_II_Attack_of_the_Clones_%28movie_poster%29.jpg";
+            break;
+        case "Revenge of the Sith":
+            imgSrc = "https://upload.wikimedia.org/wikipedia/en/9/93/Star_Wars_Episode_III_Revenge_of_the_Sith_poster.jpg";
+            break;
     }
     return imgSrc;
 }
