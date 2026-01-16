@@ -44,7 +44,6 @@ function createBodyContent(filmProperties) {
     const imgDiv = document.createElement("image-container");
     imgDiv.classList.add("image-container");
     var img = document.createElement("img");
-    /* change this part */
     img.src = imageCheck(filmProperties.title);
     imgDiv.appendChild(img);
 
