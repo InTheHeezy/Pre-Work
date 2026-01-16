@@ -12,9 +12,7 @@ async function showMovies() {
         const data = await response.json();
         const film = data.result;
         console.log(film);
-        const belowButtons = document.getElementById("belowButtons");
-
-
+        
         /*
         Container Test 
         */
@@ -65,4 +63,8 @@ async function showMovies() {
     catch (err) {
         console.error(err);
     }
+}
+
+function createBodyContent() {
+
 }
