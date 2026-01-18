@@ -41,9 +41,7 @@ function createBodyContent(film) {
 
     const link = document.createElement("a");
     link.classList.add("details-link");
-    link.id = film.uid;
-    link.href = 'movieDetails.html';
-    link.onclick = "goToNewPage(event)";
+    link.href = createLink(film.uid);
     link.textContent = film.properties.title;
 
     const txtDiv = document.createElement("text-container");
@@ -96,23 +94,13 @@ function imageCheck(filmTitle) {
     return imgSrc;
 }
 
+function createLink(id) {
+    const url = 'movieDetails.html?'
+    const search = { id: id };
+    const searchParams = new URLSearchParams(search);
 
-function goToNewPage(event) {
-    event.preventDefault();
-    const clickedId = event.target.id;
+    //DELETE
+    console.log(url + searchParams.toString());
 
-    const newPageUrl = 'movieDetails.html?itemId=' + encodeURIComponent(clickedId);
-
-    window.location.href = newPageUrl;
+    return url + searchParams.toString();
 }
-
-/*
-const detailsLink = document.querySelectorAll('details-link');
-
-detailsLink.forEach(detailsLink => {
-    detailsLink.addEventListener('click', function (event) {
-        const clickedId = event.target.id
-        console.log = clickedId;
-    });
-});
-*/
