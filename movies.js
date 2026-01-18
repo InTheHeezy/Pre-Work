@@ -10,10 +10,14 @@ async function showMovies() {
         }
 
         const data = await response.json();
-        const film = data.result;
+        //const film = data.result;
 
-        for (let i = 0; i < film.length; i++) {
-            const containerDiv = createBodyContent(film[i].properties);
+
+        //Remove 
+        console.log(data);
+
+        for (let i = 0; i < data.result.length; i++) {
+            const containerDiv = createBodyContent(data.result[i]);
 
             document.body.appendChild(containerDiv);
         }
@@ -24,21 +28,23 @@ async function showMovies() {
     }
 }
 
-function createBodyContent(filmProperties) {
+function createBodyContent(film) {
 
     const containerDiv = document.createElement("container");
     containerDiv.classList.add("container");
-
+    
     const imgDiv = document.createElement("image-container");
     imgDiv.classList.add("image-container");
     var img = document.createElement("img");
-    img.src = imageCheck(filmProperties.title);
+    img.src = imageCheck(film.properties.title);
     imgDiv.appendChild(img);
 
     const link = document.createElement("a");
     link.classList.add("details-link");
+    link.id = film.uid;
     link.href = 'movieDetails.html';
-    link.textContent = filmProperties.title;
+    link.onclick = "goToNewPage(event)";
+    link.textContent = film.properties.title;
 
     const txtDiv = document.createElement("text-container");
     txtDiv.classList.add("text-container");
@@ -46,13 +52,13 @@ function createBodyContent(filmProperties) {
     titleHeader.appendChild(link);
     
     const directors = document.createElement("p");
-    directors.textContent = "Director: " + filmProperties.director;
+    directors.textContent = "Director: " + film.properties.director;
 
     const producers = document.createElement("p");
-    producers.textContent = "Producer(s): " + filmProperties.producer;
+    producers.textContent = "Producer(s): " + film.properties.producer;
 
     const release = document.createElement("p");
-    release.textContent = "Release Date: " + filmProperties.release_date;
+    release.textContent = "Release Date: " + film.properties.release_date;
 
     txtDiv.appendChild(titleHeader);
     txtDiv.appendChild(directors);
@@ -89,3 +95,24 @@ function imageCheck(filmTitle) {
     }
     return imgSrc;
 }
+
+
+function goToNewPage(event) {
+    event.preventDefault();
+    const clickedId = event.target.id;
+
+    const newPageUrl = 'movieDetails.html?itemId=' + encodeURIComponent(clickedId);
+
+    window.location.href = newPageUrl;
+}
+
+/*
+const detailsLink = document.querySelectorAll('details-link');
+
+detailsLink.forEach(detailsLink => {
+    detailsLink.addEventListener('click', function (event) {
+        const clickedId = event.target.id
+        console.log = clickedId;
+    });
+});
+*/
