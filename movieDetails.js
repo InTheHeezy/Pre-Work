@@ -1,61 +1,29 @@
-window.onload = function () {
-    const storeData = localStorage.getItem('userData');
-    if (storeData) {
-        const receivedData = storeData;
-        showMoviesDetails(receivedData)
-        localStorage.removeItem('userData');
-    }
+showMovieDetails()
+
+async function showMovieDetails() {
+
+    const url = window.location.href;
+
+    const id = new URL(url).searchParams;
+
+    const entries = new URLSearchParams(id).entries();
+
+    const array = Array.from(entries);
+
+    console.log(array[0][1]);
+
+    //try {
+    //    const response = await fetch("https://www.swapi.tech/api/films/");
+
+    //    if (!response.ok) {
+    //        throw new Error("Could not fetch");
+    //    }
+
+    //    const data = await response.json();
+        
+    //}
+
+    //catch (err) {
+    //    console.error(err);
+    //}
 }
-
-async function showMoviesDetails(id) {
-
-    try {
-        const response = await fetch("https://www.swapi.tech/api/films/" + id);
-
-        if (!response.ok) {
-            throw new Error("Could not fetch");
-        }
-
-        const data = await response.json();
-        //const film = data.result;
-
-
-        //Remove 
-        console.log(data);
-    }
-
-    catch (err) {
-        console.error(err);
-    }
-}
-
-//var itemId = "";
-
-//document.addEventListener('movieDetails.html', (event) => {
-//    const urlParams = new URLSearchParams(window.location.search);
-//    const itemId = urlParams.get('itemId');
-
-//    if (itemId) {
-//        console.log(itemId);
-//    }
-//});
-
-//try {
-//    const response = await fetch("https://www.swapi.tech/api/films/" + itemId);
-
-//    if (!response.ok) {
-//        throw new Error("Could not fetch");
-//    }
-
-//    const data = await response.json();
-//    //const film = data.result;
-
-//    //Remove 
-//    console.log(data);
-//}
-
-//catch (err) {
-//    console.error(err);
-//}
-
-//console.log(itemId)

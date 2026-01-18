@@ -10,12 +10,7 @@ async function showMovies() {
         }
 
         const data = await response.json();
-        //const film = data.result;
-
-
-        //Remove 
-        console.log(data);
-
+      
         for (let i = 0; i < data.result.length; i++) {
             const containerDiv = createBodyContent(data.result[i]);
 
@@ -98,9 +93,6 @@ function createLink(id) {
     const url = 'movieDetails.html?'
     const search = { id: id };
     const searchParams = new URLSearchParams(search);
-
-    //DELETE
-    console.log(url + searchParams.toString());
 
     return url + searchParams.toString();
 }
