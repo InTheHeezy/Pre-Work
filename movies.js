@@ -35,11 +35,15 @@ function createBodyContent(filmProperties) {
     img.src = imageCheck(filmProperties.title);
     imgDiv.appendChild(img);
 
+    const link = document.createElement("a");
+    link.href = 'movieDetails.html';
+    link.textContent = filmProperties.title;
+
     const txtDiv = document.createElement("text-container");
     txtDiv.classList.add("text-container");
     const titleHeader = document.createElement("h1");
-    titleHeader.textContent = filmProperties.title;
-
+    titleHeader.appendChild(link);
+    
     const directors = document.createElement("p");
     directors.textContent = "Director: " + filmProperties.director;
 
