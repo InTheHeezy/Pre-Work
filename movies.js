@@ -36,6 +36,7 @@ function createBodyContent(filmProperties) {
     imgDiv.appendChild(img);
 
     const link = document.createElement("a");
+    link.classList.add("details-link");
     link.href = 'movieDetails.html';
     link.textContent = filmProperties.title;
 
