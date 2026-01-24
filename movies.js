@@ -27,7 +27,7 @@ function createBodyContent(film) {
 
     const containerDiv = document.createElement("container");
     containerDiv.classList.add("container");
-    
+
     const imgDiv = document.createElement("image-container");
     imgDiv.classList.add("image-container");
     var img = document.createElement("img");
@@ -44,20 +44,7 @@ function createBodyContent(film) {
     const titleHeader = document.createElement("h1");
     titleHeader.appendChild(link);
     
-    const directors = document.createElement("p");
-    directors.textContent = "Director: " + film.properties.director;
-
-    const producers = document.createElement("p");
-    producers.textContent = "Producer(s): " + film.properties.producer;
-
-    const release = document.createElement("p");
-    release.textContent = "Release Date: " + film.properties.release_date;
-
     txtDiv.appendChild(titleHeader);
-    txtDiv.appendChild(directors);
-    txtDiv.appendChild(producers);
-    txtDiv.appendChild(release);
-
     containerDiv.appendChild(imgDiv);
     containerDiv.appendChild(txtDiv);
 
