@@ -32,12 +32,12 @@
     padding: 10px;
 }
 
-.image-container{
-
+.image-container {
+    
 }
 
 .text-container{
-
+    
 }
 
 .image-container img{
@@ -60,4 +60,8 @@
 
 .details-link:hover {
     color:yellow;
+}
+
+p{
+    white-space: pre-line;
 }

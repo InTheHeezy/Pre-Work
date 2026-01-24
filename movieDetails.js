@@ -20,7 +20,7 @@ async function showMovieDetails() {
         }
 
         const data = await response.json();
-
+        console.log(data);
         document.body.appendChild(createBodyContent(data.result))
     }
 
@@ -45,6 +45,9 @@ function createBodyContent(film) {
     const titleHeader = document.createElement("h1");
     titleHeader.textContent = film.properties.title;
 
+    const episodeNum = document.createElement("p");
+    episodeNum.textContent = "Episode Number: " + film.properties.episode_id;
+
     const directors = document.createElement("p");
     directors.textContent = "Director: " + film.properties.director;
 
@@ -54,14 +57,18 @@ function createBodyContent(film) {
     const release = document.createElement("p");
     release.textContent = "Release Date: " + film.properties.release_date;
 
+    const openCrawl = document.createElement("p");
+    openCrawl.textContent = "Opening Crawl:\n" + film.properties.opening_crawl;
+
     txtDiv.appendChild(titleHeader);
+    txtDiv.appendChild(episodeNum);
     txtDiv.appendChild(directors);
     txtDiv.appendChild(producers);
     txtDiv.appendChild(release);
 
     containerDiv.appendChild(imgDiv);
     containerDiv.appendChild(txtDiv);
-
+    containerDiv.appendChild(openCrawl);
     return containerDiv;
 }
 
