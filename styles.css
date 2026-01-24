@@ -32,16 +32,36 @@
     padding: 10px;
 }
 
-.image-container{
-
+.image-container {
+    
 }
 
 .text-container{
-
+    
 }
 
 .image-container img{
     max-width: auto; /* image size */
     height: auto;
     display: block; /* removes default bottom margin */
+}
+
+.details-link {
+    color:white;
+}
+
+.details-link:link {
+    color:white;
+}
+
+.details-link:visited {
+    color:white;
+}
+
+.details-link:hover {
+    color:yellow;
+}
+
+p{
+    white-space: pre-line;
 }

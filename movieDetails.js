@@ -1,21 +1,27 @@
-showMovies()
+showMovieDetails()
 
-async function showMovies() {
-    
+async function showMovieDetails() {
+
+    const url = window.location.href;
+
+    const id = new URL(url).searchParams;
+
+    const entries = new URLSearchParams(id).entries();
+
+    const array = Array.from(entries);
+
+    const uid = array[0][1];
+
     try {
-        const response = await fetch("https://www.swapi.tech/api/films");
+        const response = await fetch("https://www.swapi.tech/api/films/" + uid);
 
         if (!response.ok) {
             throw new Error("Could not fetch");
         }
 
         const data = await response.json();
-      
-        for (let i = 0; i < data.result.length; i++) {
-            const containerDiv = createBodyContent(data.result[i]);
-
-            document.body.appendChild(containerDiv);
-        }
+        console.log(data);
+        document.body.appendChild(createBodyContent(data.result))
     }
 
     catch (err) {
@@ -34,20 +40,35 @@ function createBodyContent(film) {
     img.src = imageCheck(film.properties.title);
     imgDiv.appendChild(img);
 
-    const link = document.createElement("a");
-    link.classList.add("details-link");
-    link.href = createLink(film.uid);
-    link.textContent = film.properties.title;
-
     const txtDiv = document.createElement("text-container");
     txtDiv.classList.add("text-container");
     const titleHeader = document.createElement("h1");
-    titleHeader.appendChild(link);
-    
+    titleHeader.textContent = film.properties.title;
+
+    const episodeNum = document.createElement("p");
+    episodeNum.textContent = "Episode Number: " + film.properties.episode_id;
+
+    const directors = document.createElement("p");
+    directors.textContent = "Director: " + film.properties.director;
+
+    const producers = document.createElement("p");
+    producers.textContent = "Producer(s): " + film.properties.producer;
+
+    const release = document.createElement("p");
+    release.textContent = "Release Date: " + film.properties.release_date;
+
+    const openCrawl = document.createElement("p");
+    openCrawl.textContent = "Opening Crawl:\n" + film.properties.opening_crawl;
+
     txtDiv.appendChild(titleHeader);
+    txtDiv.appendChild(episodeNum);
+    txtDiv.appendChild(directors);
+    txtDiv.appendChild(producers);
+    txtDiv.appendChild(release);
+
     containerDiv.appendChild(imgDiv);
     containerDiv.appendChild(txtDiv);
-
+    containerDiv.appendChild(openCrawl);
     return containerDiv;
 }
 
@@ -74,12 +95,4 @@ function imageCheck(filmTitle) {
             break;
     }
     return imgSrc;
-}
-
-function createLink(id) {
-    const url = 'movieDetails.html?'
-    const search = { id: id };
-    const searchParams = new URLSearchParams(search);
-
-    return url + searchParams.toString();
 }
