@@ -69,3 +69,52 @@ function createLink(id) {
     return url + searchParams.toString();
 }
 
+let isLoading = false;
+
+function handleScroll() {
+    if (isLoading) return;
+
+    const {
+        scrollTop,
+        scrollHeight,
+        clientHeight
+    } = document.documentElement;
+
+    const threshold = 200;
+
+    if (scrollTop + clientHeight >= scrollHeight - threshold) {
+        isLoading = true;
+        loadMoreContent();
+    }
+}
+
+async function loadMoreContent() {
+    if (data.next != null) {
+        try {
+            const response = await fetch(data.next);
+
+            if (!response.ok) {
+                throw new Error("Could not fetch");
+            }
+
+            data = await response.json();
+
+            /* delete this */
+            //console.log(data);
+
+            for (let i = 0; i < data.results.length; i++) {
+                const containerDiv = createBodyContent(data.results[i]);
+
+                document.body.appendChild(containerDiv);
+            }
+
+            isLoading = false;
+        }
+
+        catch (err) {
+            console.error(err);
+        }
+    }
+}
+
+window.addEventListener('scroll', handleScroll);
