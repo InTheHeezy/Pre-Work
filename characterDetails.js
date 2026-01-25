@@ -21,7 +21,7 @@ async function showCharacterDetails() {
 
         const data = await response.json();
         console.log(data);
-        //document.body.appendChild(createBodyContent(data.result))
+        document.body.appendChild(createBodyContent(data.result))
     }
 
     catch (err) {
@@ -29,8 +29,56 @@ async function showCharacterDetails() {
     }
 }
 
+function createBodyContent(character) {
 
+    const containerDiv = document.createElement("container");
+    containerDiv.classList.add("container");
 
+    const imgDiv = document.createElement("image-container");
+    imgDiv.classList.add("image-container");
+    var img = document.createElement("img");
+    img.src = imageCheck(character.uid);
+    imgDiv.appendChild(img);
+
+    const txtDiv = document.createElement("text-container");
+    txtDiv.classList.add("text-container");
+    const name = document.createElement("h1");
+    name.textContent = character.properties.name;
+
+    const birthYear = document.createElement("p");
+    birthYear.textContent = "Birth Year: " + character.properties.birth_year;
+
+    const eyeColor = document.createElement("p");
+    eyeColor.textContent = "Eye Color: " + character.properties.eye_color;
+
+    const gender = document.createElement("p");
+    gender.textContent = "Gender: " + character.properties.gender;
+
+    const hairColor = document.createElement("p");
+    hairColor.textContent = "Hair Color: " + character.properties.hair_color;
+
+    const height = document.createElement("p");
+    height.textContent = "Height(cm): " + character.properties.height;
+
+    const mass = document.createElement("p");
+    mass.textContent = "Mass: " + character.properties.mass;
+
+    const skinColor = document.createElement("p");
+    skinColor.textContent = "Skin Color: " + character.properties.skin_color;
+
+    txtDiv.appendChild(name);
+    txtDiv.appendChild(birthYear);
+    txtDiv.appendChild(eyeColor);
+    txtDiv.appendChild(gender);
+    txtDiv.appendChild(hairColor);
+    txtDiv.appendChild(height);
+    txtDiv.appendChild(mass);
+    txtDiv.appendChild(skinColor);
+
+    containerDiv.appendChild(imgDiv);
+    containerDiv.appendChild(txtDiv);
+    return containerDiv;
+}
 
 /* WARNING giant map filled with image links */
 const imageLinks = new Map([
