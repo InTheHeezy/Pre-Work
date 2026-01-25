@@ -41,8 +41,8 @@
 }
 
 .image-container img{
-    max-width: auto; /* image size */
-    height: auto;
+    max-width: 250px; /* image size */
+    height: 300px;
     display: block; /* removes default bottom margin */
 }
 
