@@ -20,7 +20,6 @@ async function showMovieDetails() {
         }
 
         const data = await response.json();
-        console.log(data);
         document.body.appendChild(createBodyContent(data.result))
     }
 

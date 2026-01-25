@@ -1,23 +1,27 @@
-var data;
+showCharacterDetails()
 
-showCharacters()
+async function showCharacterDetails() {
 
-async function showCharacters() {
+    const url = window.location.href;
+
+    const id = new URL(url).searchParams;
+
+    const entries = new URLSearchParams(id).entries();
+
+    const array = Array.from(entries);
+
+    const uid = array[0][1];
 
     try {
-        const response = await fetch("https://www.swapi.tech/api/people");
+        const response = await fetch("https://www.swapi.tech/api/people/" + uid);
 
         if (!response.ok) {
             throw new Error("Could not fetch");
         }
 
-        data = await response.json();
-
-        for (let i = 0; i < data.results.length; i++) {
-            const containerDiv = createBodyContent(data.results[i]);
-
-            document.body.appendChild(containerDiv);
-        }
+        const data = await response.json();
+        console.log(data);
+        document.body.appendChild(createBodyContent(data.result))
     }
 
     catch (err) {
@@ -25,7 +29,7 @@ async function showCharacters() {
     }
 }
 
-function createBodyContent(chara) {
+function createBodyContent(character) {
 
     const containerDiv = document.createElement("container");
     containerDiv.classList.add("container");
@@ -33,88 +37,52 @@ function createBodyContent(chara) {
     const imgDiv = document.createElement("image-container");
     imgDiv.classList.add("image-container");
     var img = document.createElement("img");
-    img.src = imageCheck(chara.uid);
+    img.src = imageCheck(character.uid);
     imgDiv.appendChild(img);
-
-    const link = document.createElement("a");
-    link.classList.add("details-link");
-    link.href = createLink(chara.uid);
-    link.textContent = chara.name;
 
     const txtDiv = document.createElement("text-container");
     txtDiv.classList.add("text-container");
-    const titleHeader = document.createElement("h1");
-    titleHeader.appendChild(link);
+    const name = document.createElement("h1");
+    name.textContent = character.properties.name;
 
-    const loadDiv = document.createElement("div");
-    loadDiv.classList.add("loader");
+    const birthYear = document.createElement("p");
+    birthYear.textContent = "Birth Year: " + character.properties.birth_year;
 
-    txtDiv.appendChild(titleHeader);
+    const eyeColor = document.createElement("p");
+    eyeColor.textContent = "Eye Color: " + character.properties.eye_color;
+
+    const gender = document.createElement("p");
+    gender.textContent = "Gender: " + character.properties.gender;
+
+    const hairColor = document.createElement("p");
+    hairColor.textContent = "Hair Color: " + character.properties.hair_color;
+
+    const height = document.createElement("p");
+    height.textContent = "Height(cm): " + character.properties.height;
+
+    const mass = document.createElement("p");
+    mass.textContent = "Mass: " + character.properties.mass;
+
+    const skinColor = document.createElement("p");
+    skinColor.textContent = "Skin Color: " + character.properties.skin_color;
+
+    txtDiv.appendChild(name);
+    txtDiv.appendChild(birthYear);
+    txtDiv.appendChild(eyeColor);
+    txtDiv.appendChild(gender);
+    txtDiv.appendChild(hairColor);
+    txtDiv.appendChild(height);
+    txtDiv.appendChild(mass);
+    txtDiv.appendChild(skinColor);
+
     containerDiv.appendChild(imgDiv);
     containerDiv.appendChild(txtDiv);
-    containerDiv.appendChild(loadDiv);
-
     return containerDiv;
-} 
-
-function createLink(id) {
-    const url = 'characterDetails.html?'
-    const search = { id: id };
-    const searchParams = new URLSearchParams(search);
-
-    return url + searchParams.toString();
 }
-
-let isLoading = false;
-
-function handleScroll() {
-    if (isLoading) return;
-
-    const {
-        scrollTop,
-        scrollHeight,
-        clientHeight
-    } = document.documentElement;
-
-    const threshold = 200;
-
-    if (scrollTop + clientHeight >= scrollHeight - threshold) {
-        isLoading = true;
-        loadMoreContent();
-    }
-}
-
-async function loadMoreContent() {
-    if (data.next != null) {
-        try {
-            const response = await fetch(data.next);
-
-            if (!response.ok) {
-                throw new Error("Could not fetch");
-            }
-
-            data = await response.json();
-;
-            for (let i = 0; i < data.results.length; i++) {
-                const containerDiv = createBodyContent(data.results[i]);
-
-                document.body.appendChild(containerDiv);
-            }
-
-            isLoading = false;
-        }
-
-        catch (err) {
-            console.error(err);
-        }
-    }
-}
-
-window.addEventListener('scroll', handleScroll);
 
 /* WARNING giant map filled with image links */
 const imageLinks = new Map([
-    [1,"https://upload.wikimedia.org/wikipedia/commons/6/67/Luke_Skywalker_-_Welcome_Banner_%28Cropped%29.jpg"],
+    [1, "https://upload.wikimedia.org/wikipedia/commons/6/67/Luke_Skywalker_-_Welcome_Banner_%28Cropped%29.jpg"],
     [2, "https://upload.wikimedia.org/wikipedia/en/5/5c/C-3PO_droid.png"],
     [3, "https://upload.wikimedia.org/wikipedia/en/3/39/R2-D2_Droid.png"],
     [4, "https://static.wikia.nocookie.net/starwars/images/9/94/Vaderrotj.jpg/revision/latest?cb=20070418231644"],
@@ -142,7 +110,7 @@ const imageLinks = new Map([
     [26, "https://static.wikia.nocookie.net/starwars/images/7/72/Lobot-SWE.png/revision/latest?cb=20211214014446"],
     [27, "https://static.wikia.nocookie.net/starwars/images/2/29/Admiral_Ackbar_RH.png/revision/latest?cb=20221224032123"],
     [28, "https://static.wikia.nocookie.net/starwars/images/c/c8/MonMothma-RotJAVA.png/revision/latest?cb=20250424135205"],
-    [29, "https://static.wikia.nocookie.net/starwars/images/d/de/Arvel-crynyd.jpg/revision/latest?cb=20120113223349"], 
+    [29, "https://static.wikia.nocookie.net/starwars/images/d/de/Arvel-crynyd.jpg/revision/latest?cb=20120113223349"],
     [30, "https://static.wikia.nocookie.net/starwars/images/a/aa/Wicket-2024Base.png/revision/latest?cb=20251026210916"],
     [31, "https://static.wikia.nocookie.net/starwars/images/e/ec/NienNunbHeadshot-SWBC62-alpha.png/revision/latest?cb=20240218060701"],
     [32, "https://static.wikia.nocookie.net/starwars/images/f/f6/Qui-Gon_Jinn_Headshot_TPM.jpg/revision/latest?cb=20180430174809"],
