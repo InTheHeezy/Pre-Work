@@ -5,7 +5,7 @@ showCharacters()
 async function showCharacters() {
 
     try {
-        const response = await fetch("https://www.swapi.tech/api/people");
+        const response = await fetch(import.meta.env.VITE_CHARA_API_URL);
 
         if (!response.ok) {
             throw new Error("Could not fetch");
