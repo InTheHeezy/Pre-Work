@@ -13,7 +13,7 @@ async function showMovieDetails() {
     const uid = array[0][1];
 
     try {
-        const response = await fetch("https://www.swapi.tech/api/films/" + uid);
+        const response = await fetch(import.meta.env.VITE_MOVIE_API_URL + uid);
 
         if (!response.ok) {
             throw new Error("Could not fetch");
